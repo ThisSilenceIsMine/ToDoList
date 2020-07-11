@@ -2,7 +2,6 @@
 #define TODOLISTMODEL_H
 
 #include <QAbstractListModel>
-#include <QMetaEnum>
 
 class ToDoList;
 
@@ -37,7 +36,6 @@ private:
     // QAbstractItemModel interface
 
     ToDoList *mList;
-
 
 };
 

@@ -12,7 +12,7 @@ bool ToDoList::setItemAt(int index, const ToDoItem &item)
 
     const ToDoItem &oldItem = mItems.at(index);
 
-    if(item.done == oldItem.done || item.description == oldItem.description)
+    if(item.done == oldItem.done && item.description == oldItem.description)
         return false;
 
     mItems[index] = item;
@@ -28,7 +28,8 @@ void ToDoList::appendItem()
 {
     emit preItemAppended();
 
-    ToDoItem item{false, QStringLiteral("")};
+    ToDoItem item;
+    item.done = false;
     mItems.append(item);
 
     emit postItemAppended();
@@ -36,15 +37,13 @@ void ToDoList::appendItem()
 
 void ToDoList::removeCompletedItems()
 {
-    for(int i = 0; i < mItems.size(); ) {
+    for(int i = 0; i < mItems.size(); ++i) {
         if(mItems.at(i).done == true) {
             emit preItemRemoved(i);
 
             mItems.removeAt(i);
 
             emit postItemRemoved();
-        } else {
-            ++i;
         }
     }
 }
